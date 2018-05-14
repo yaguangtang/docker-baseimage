@@ -23,12 +23,13 @@ WORKDIR /tmp
 
 # Copy helpers.
 COPY helpers/* /usr/local/bin/
+COPY s6-overlay.tar.gz .
 
 # Install s6 overlay.
 RUN \
     add-pkg --virtual build-dependencies curl ca-certificates patch && \
     echo "Downloading s6-overlay..." && \
-    curl -# -L -o s6-overlay.tar.gz ${S6_OVERLAY_URL} && \
+    #curl -# -L -o s6-overlay.tar.gz ${S6_OVERLAY_URL} && \
     echo "Installing s6-overlay..." && \
     # Workaround for some distro where '/bin' being a symlink to '/usr/bin':
     # extract the tarball in two steps.
